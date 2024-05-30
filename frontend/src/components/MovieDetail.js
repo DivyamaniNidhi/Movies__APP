@@ -5,9 +5,9 @@ import {
   Text,
   Button,
   VStack,
-  HStack,
   StackDivider,
   Spinner,
+  Flex,
 } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getMovieDetails } from "../api";
@@ -35,22 +35,30 @@ const MovieDetail = () => {
   }
 
   return (
-    <Box p="6">
+    <Box p={{ base: "4", md: "6" }}>
       <Button onClick={() => navigate(-1)} mb="4" colorScheme="teal">
         Go Back
       </Button>
-      <HStack spacing="8" align="start">
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        spacing="8"
+        align="start"
+        wrap="wrap"
+      >
         <Image
           src={movie.Poster}
           alt={movie.Title}
-          boxSize="300px"
+          boxSize={{ base: "100%", md: "300px" }}
           objectFit="cover"
           borderRadius="md"
+          mb={{ base: "4", md: "0" }}
         />
         <VStack
           align="start"
           spacing="4"
           divider={<StackDivider borderColor="gray.200" />}
+          flex="1"
+          ml={{ base: "0", md: "8" }}
         >
           <Text fontWeight="bold" fontSize="2xl">
             {movie.Title}
@@ -118,7 +126,7 @@ const MovieDetail = () => {
             ))}
           </Box>
         </VStack>
-      </HStack>
+      </Flex>
     </Box>
   );
 };
