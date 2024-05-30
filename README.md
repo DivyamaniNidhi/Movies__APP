@@ -15,8 +15,8 @@ The app consists of a backend server built with Node.js and Express, and a front
 ## Setup and Installation
 
 ### Prerequisites
-- Node.js (v14 or above)
-- npm (v6 or above)
+- Node.js
+- npm
 
 ### Backend Setup
 1. Clone the repository and navigate to the `backend` directory:
