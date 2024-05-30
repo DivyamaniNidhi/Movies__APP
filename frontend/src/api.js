@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "/api"; // Use relative path
+const API_URL = "api"; // Use relative path
 
 // API endpoint to search movies by title
 export const searchMovies = (title) => {

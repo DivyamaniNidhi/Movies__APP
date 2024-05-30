@@ -1,8 +1,5 @@
 # dependencies
 /node_modules
 
-vercel.json
-
-
 # Ignore .env file
 .env
