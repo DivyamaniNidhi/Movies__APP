@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const API_URL = "https://movies-app-server.vercel.app/api"; // Use relative path
-
 // API endpoint to search movies by title
 export const searchMovies = (title) => {
   return axios.get(`${API_URL}/movies`, { params: { title } });

@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 const MovieCard = ({ movie }) => {
   return (
     <Box
-      borderWidth="1px"
+      borderWidth="2px"
       borderRadius="lg"
       overflow="hidden"
+      backgroundColor="white"
       m="2"
       p="4"
       display="flex"

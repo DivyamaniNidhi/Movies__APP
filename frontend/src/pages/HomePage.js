@@ -1,3 +1,4 @@
+import "../../src/HomePage.css";
 import React, { useState, useEffect } from "react";
 import { Box, Input, Button } from "@chakra-ui/react";
 import { searchMovies } from "../api";
@@ -21,6 +22,21 @@ const HomePage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    // Reset state on page refresh
+    const handlePageRefresh = () => {
+      sessionStorage.removeItem("searchTerm");
+      sessionStorage.removeItem("movies");
+      setSearchTerm("");
+      setMovies([]);
+    };
+
+    window.addEventListener("beforeunload", handlePageRefresh);
+    return () => {
+      window.removeEventListener("beforeunload", handlePageRefresh);
+    };
+  }, []);
+
   const handleSearch = () => {
     searchMovies(searchTerm)
       .then((response) => {
@@ -37,16 +53,31 @@ const HomePage = () => {
   };
 
   return (
-    <Box p="6">
-      <Input
-        placeholder="Search for movies..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <Button mt="4" onClick={handleSearch} colorScheme="teal">
-        Search
-      </Button>
-      {error && <Box color="red">{error}</Box>}
+    <Box
+      className="homepage"
+      p="6"
+      minHeight="100vh"
+      backgroundSize="cover"
+      backgroundPosition="center"
+    >
+      <Box
+        bg="rgba(255, 255, 255, 0.8)"
+        borderRadius="md"
+        p="6"
+        maxWidth="600px"
+        mx="auto"
+        boxShadow="xl"
+      >
+        <Input
+          placeholder="Search for movies..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <Button mt="4" onClick={handleSearch} colorScheme="teal">
+          Search
+        </Button>
+        {error && <Box color="red">{error}</Box>}
+      </Box>
       <MovieList movies={movies} />
     </Box>
   );
