@@ -1,6 +1,14 @@
 import "../../src/HomePage.css";
 import React, { useState, useEffect } from "react";
-import { Box, Input, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Button,
+  IconButton,
+} from "@chakra-ui/react";
+import { CloseIcon } from "@chakra-ui/icons";
 import { searchMovies } from "../api";
 import MovieList from "../components/MovieList";
 
@@ -52,6 +60,14 @@ const HomePage = () => {
       });
   };
 
+  const handleClear = () => {
+    setSearchTerm("");
+    setMovies([]);
+    setError(null);
+    sessionStorage.removeItem("searchTerm");
+    sessionStorage.removeItem("movies");
+  };
+
   return (
     <Box
       className="homepage"
@@ -68,11 +84,23 @@ const HomePage = () => {
         mx="auto"
         boxShadow="xl"
       >
-        <Input
-          placeholder="Search for movies..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <InputGroup>
+          <Input
+            placeholder="Search for movies..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          {searchTerm && (
+            <InputRightElement>
+              <IconButton
+                aria-label="Clear search"
+                icon={<CloseIcon />}
+                onClick={handleClear}
+                size="sm"
+              />
+            </InputRightElement>
+          )}
+        </InputGroup>
         <Button mt="4" onClick={handleSearch} colorScheme="teal">
           Search
         </Button>
